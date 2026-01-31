@@ -7,8 +7,8 @@ const port = 443;
 const server = createServer((req, res) => {
   const url = new URL(req.url, `http://${req.headers.host}`);
 
-  const a = url.searchParams.get(x);
-  const b = url.searchParams.get(y);
+  const a = Number(url.searchParams.get(x));
+  const b = Number(url.searchParams.get(y));
 
   const result = checkEvclidNoC(a, b);
 
