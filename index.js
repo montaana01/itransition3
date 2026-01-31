@@ -38,7 +38,7 @@ function checkEvclidNoC(a, b) {
       bigger = lower;
       lower = minus;
       continue;
-    } else if (minus = 0) {
+    } else if (minus === 0) {
       result = bigger;
     }
   }
