@@ -1,11 +1,12 @@
 import { createServer } from 'node:http';
 import { URL } from 'node:url';
 
-const hostname = '127.0.0.1';
+const hostname = 'itransition.yakovlevdev.com';
 const port = 443;
 
 const server = createServer((req, res) => {
-  const url = new URL(req.url, `http://${req.headers.host}`);
+  const baseUrl = `http://${req.headers.host || 'itransition.yakovlevdev.com'}`;
+  const url = new URL(req.url || '/', baseUrl);
 
   const a = Number(url.searchParams.get('x'));
   const b = Number(url.searchParams.get('y'));
@@ -18,17 +19,22 @@ const server = createServer((req, res) => {
 
   const result = checkNoc(a, b);
 
-  res.writeHead(200, { 'Content-Type': 'text/html' });
+  res.writeHead(200, {
+    'Content-Type': 'text/html',
+    'Access-Control-Allow-Origin': '*'
+  });
   res.end(result);
 });
 
 server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+  console.log(`Server running at https://${hostname}:${port}/`);
 });
 
 function checkNoc(a, b) {
   if (a === 0 && b === 0) return 0;
-  return Math.abs(a * b) / checkEvclidNod(a, b);
+  if (a === 0 || b === 0) return 0;
+  const nod = checkEvclidNod(a, b);
+  return Math.abs(a * b) / nod;
 }
 
 function checkEvclidNod(a, b) {
