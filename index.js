@@ -1,14 +1,14 @@
 import { createServer } from 'node:http';
 import { URL } from 'node:url';
 
-const hostname = '127.0.0.1';
+const hostname = '0.0.0.0';
 const port = 443;
 
 const server = createServer((req, res) => {
   const url = new URL(req.url, `http://${req.headers.host}`);
 
-  const a = Number(url.searchParams.get(x));
-  const b = Number(url.searchParams.get(y));
+  const a = Number(url.searchParams.get('x'));
+  const b = Number(url.searchParams.get('y'));
 
   const result = checkEvclidNoC(a, b);
 
@@ -33,7 +33,7 @@ function checkEvclidNoC(a, b) {
   }
 
   while (result === '') {
-    minus = bigger - lower;
+    const minus = bigger - lower;
     if (minus > 0) {
       bigger = lower;
       lower = minus;
