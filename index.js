@@ -10,7 +10,7 @@ const server = createServer((req, res) => {
   const a = Number(url.searchParams.get('x'));
   const b = Number(url.searchParams.get('y'));
 
-  const result = checkEvclidNoC(a, b);
+  const result = checkNoc(a, b);
 
   res.writeHead(200, { 'Content-Type': 'text/html' });
   res.end(result);
@@ -20,28 +20,20 @@ server.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
 
-function checkEvclidNoC(a, b) {
-  let result = '';
-  let lower;
-  let bigger;
-  if (b > a) {
-    bigger = b;
-    lower = a;
-  } else {
-    bigger = a;
-    lower = b;
+function checkNoc(a, b) {
+  if (a === 0 && b === 0) return 0;
+  return Math.abs(a * b) / checkEvclidNod(a, b);
+}
+
+function checkEvclidNod(a, b) {
+  a = Math.abs(a);
+  b = Math.abs(b);
+
+  while (minus !== 0) {
+    const temp = b;
+    b = a % b;
+    a = temp;
   }
 
-  while (result === '') {
-    const minus = bigger - lower;
-    if (minus > 0) {
-      bigger = lower;
-      lower = minus;
-      continue;
-    } else if (minus === 0) {
-      result = bigger;
-    }
-  }
-
-  return result;
+  return a;
 }
