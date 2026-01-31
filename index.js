@@ -30,22 +30,20 @@ server.listen(port, hostname, () => {
   console.log(`Server running at https://${hostname}:${port}/`);
 });
 
-function checkNoc(a, b) {
-  if (a === 0 && b === 0) return 0;
-  if (a === 0 || b === 0) return 0;
-  const nod = checkEvclidNod(a, b);
-  return Math.abs(a * b) / nod;
-}
-
 function checkEvclidNod(a, b) {
   a = Math.abs(a);
   b = Math.abs(b);
-
   while (b !== 0) {
     const temp = b;
     b = a % b;
     a = temp;
   }
-
   return a;
+}
+
+function checkNoc(a, b) {
+  if (a === 0 && b === 0) return 0;
+  if (a === 0 || b === 0) return 0;
+  const nod = checkEvclidNod(a, b);
+  return Math.abs(a * b) / nod;
 }
