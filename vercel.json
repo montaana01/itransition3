@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/yakovlevworkby_gmail_com",
+      "destination": "/api/yakovlevworkby_gmail_com"
+    }
+  ]
+}
